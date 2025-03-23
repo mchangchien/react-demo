@@ -13,8 +13,7 @@ app.http('GetRoles', {
  
         return {
             status: 200,
-            headers: { 'Content-Type': 'application/json' },
-            body: { roles }
+            jsonBody: { roles }
         };
         
 
