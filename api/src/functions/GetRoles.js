@@ -12,9 +12,10 @@ app.http('GetRoles', {
         const roles = [];
  
         roles.push("tttt");
-        return JSON({
+        context.JSON({
             roles, // Return roles in the response body
         });
+
     }
 });
 
