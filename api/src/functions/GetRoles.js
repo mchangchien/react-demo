@@ -1,7 +1,7 @@
 const { app } = require('@azure/functions');
 
 const roleGroupMappings = {
-    'admin': '21a96550-aa02-486e-9297-e6e51b6398fc',
+    'admin': '0d89b60c-e78a-48e5-91a0-085af87eaa94',
     'reader': '33bb071c-118d-40d1-a5d7-7ced5900b973'
 };
 
