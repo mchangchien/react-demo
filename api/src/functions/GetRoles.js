@@ -1,5 +1,9 @@
 const { app } = require('@azure/functions');
 
+function getClaimValue(typ) {
+    const claim = userClaims.find(c => c.typ === typ);
+    return claim ? claim.val : null; // Return the value if found, otherwise return null
+  }
 
 app.http('GetRoles', {
     methods: ['GET', 'POST'],
@@ -9,9 +13,11 @@ app.http('GetRoles', {
 
         const user = request.body || {};
         const roles = [];
-        
-        const data = user.json();
+          
+        // Example usage:
+        const name = getClaimValue("name");
 
+        roles.fill("name");
         return { roles };
     }
 });
