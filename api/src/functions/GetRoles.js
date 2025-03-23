@@ -7,12 +7,8 @@ app.http('GetRoles', {
     handler: async (request, context) => {
         context.log(`Http function processed request for url "${request.url}"`);
 
-        const user = request.body || {};
+        //const user = request.body || {};
         const roles = [];
-        
-        const data = user.json();
-        console.log("Raw payload :", data); // Debug raw response
-        
         return { roles };
     }
 });
