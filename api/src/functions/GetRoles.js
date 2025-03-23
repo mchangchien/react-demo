@@ -12,12 +12,12 @@ app.http('GetRoles', {
         const roles = [];
  
         roles.push("tttt");
-        return { body: {
+        return { 
             "roles": [
               "Reader",
               "Contributor"
             ]
-          }};
+          };
 
     }
 });
