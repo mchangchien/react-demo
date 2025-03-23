@@ -13,7 +13,7 @@ app.http('GetRoles', {
  
         roles.push("tttt");
         return {
-            body: { roles }, // Return roles in the response body
+            body: { userRoles:roles }, // Return roles in the response body
         };
     }
 });
