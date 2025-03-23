@@ -20,7 +20,10 @@ app.http('GetRoles', {
         const name = getClaimValue("name");
 
         roles.push("tttt");
-        return { roles};
+        return {
+            status: 200,
+            body: { roles }, // Return roles in the response body
+        };
     }
 });
 
