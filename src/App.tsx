@@ -3,11 +3,18 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 
+interface Claim {
+  typ: string;
+  val: string;
+}
+
 function App() {
   const [count, setCount] = useState(0);
-  const [user, setUser] = useState<{ name: string; roles: string[] } | null>(
-    null
-  );
+  const [user, setUser] = useState<{
+    name: string;
+    roles: string[];
+    permissions: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -19,9 +26,27 @@ function App() {
           const data = await response.json();
           console.log("Raw payload from /.auth/me:", data); // Debug raw response
           const clientPrincipal = data.clientPrincipal;
+          // Function to get claim value by type
+          const getClaimValue = (claimType: string): string => {
+            if (
+              !clientPrincipal.claims ||
+              !Array.isArray(clientPrincipal.claims)
+            ) {
+              console.warn("No valid claims array found in clientPrincipal");
+              return "";
+            }
+
+            const claim = clientPrincipal.claims.find(
+              (claim: Claim) => claim.typ === claimType
+            );
+
+            return claim ? claim.val : "";
+          };
+          const approles = getClaimValue("roles");
           setUser({
             name: clientPrincipal.userDetails,
             roles: clientPrincipal.userRoles,
+            permissions: approles,
           });
         } else {
           setError("Please log in to see your roles.");
@@ -55,7 +80,9 @@ function App() {
       <div>
         {user ? (
           <>
-            <p>Welcome, {user.name}!</p>
+            <p>
+              Welcome, {user.name}! permission is {user.permissions}
+            </p>
             <p>Your roles: {user.roles.join(", ")}</p>
             <a href="/.auth/logout">Logout</a>
           </>
