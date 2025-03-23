@@ -17,6 +17,7 @@ function App() {
         const response = await fetch("/.auth/me");
         if (response.ok) {
           const data = await response.json();
+          console.log("Raw payload from /.auth/me:", data); // Debug raw response
           const clientPrincipal = data.clientPrincipal;
           setUser({
             name: clientPrincipal.userDetails,
