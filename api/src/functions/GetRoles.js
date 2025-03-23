@@ -21,7 +21,6 @@ app.http('GetRoles', {
 
         roles.push("tttt");
         return {
-            status: 200,
             body: { roles }, // Return roles in the response body
         };
     }
