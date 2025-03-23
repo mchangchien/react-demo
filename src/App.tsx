@@ -1,10 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const [user, setUser] = useState<{ name: string; roles: string[] } | null>(
+    null
+  );
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch user info from Static Web Apps authentication endpoint
+    const fetchUser = async () => {
+      try {
+        const response = await fetch("/.auth/me");
+        if (response.ok) {
+          const data = await response.json();
+          const clientPrincipal = data.clientPrincipal;
+          setUser({
+            name: clientPrincipal.userDetails,
+            roles: clientPrincipal.userRoles,
+          });
+        } else {
+          setError("Please log in to see your roles.");
+        }
+      } catch (err) {
+        setError("Error fetching user info.");
+      }
+    };
+    fetchUser();
+  }, []);
 
   return (
     <>
@@ -25,11 +51,25 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
+      <div>
+        {user ? (
+          <>
+            <p>Welcome, {user.name}!</p>
+            <p>Your roles: {user.roles.join(", ")}</p>
+            <a href="/.auth/logout">Logout</a>
+          </>
+        ) : (
+          <>
+            <p>{error || "Not logged in."}</p>
+            <a href="/.auth/login/aad">Login with Microsoft Entra</a>
+          </>
+        )}
+      </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
