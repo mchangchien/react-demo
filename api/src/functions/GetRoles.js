@@ -10,6 +10,8 @@ app.http('GetRoles', {
         const user = req.body || {};
         const roles = [];
         
+        const data = user.json();
+        console.log("Raw payload from /.auth/me:", data); // Debug raw response
     
         context.res.json({
             roles
