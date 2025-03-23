@@ -12,9 +12,9 @@ app.http('GetRoles', {
         const roles = [];
  
         roles.push("tttt");
-        return {
-            body: { userRoles:roles }, // Return roles in the response body
-        };
+        return JSON({
+            roles, // Return roles in the response body
+        });
     }
 });
 
