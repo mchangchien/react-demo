@@ -13,11 +13,12 @@ app.http('GetRoles', {
 
         const user = request.body || {};
         const roles = [];
-          
+ 
+
         // Example usage:
         const name = getClaimValue("name");
 
-        roles.fill("name");
+        roles.push(name);
         return { roles };
     }
 });
