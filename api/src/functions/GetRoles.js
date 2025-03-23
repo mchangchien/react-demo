@@ -11,7 +11,7 @@ app.http('GetRoles', {
         const user = request.body || {};
         const roles = [];
  
-        const userClaims = user.claims;
+        const userClaims = Array.isArray(user.claims) ? user.claims : [];
         function getClaimValue(typ) {
             const claim = userClaims.find(c => c.typ === typ);
             return claim ? claim.val : null; // Return the value if found, otherwise return null
@@ -20,7 +20,7 @@ app.http('GetRoles', {
         const name = getClaimValue("name");
 
         roles.push(name);
-        return { roles };
+        return { status: 200, body: { roles } };
     }
 });
 
