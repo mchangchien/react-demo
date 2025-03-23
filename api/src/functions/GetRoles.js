@@ -9,15 +9,14 @@ app.http('GetRoles', {
         context.log(`Http function processed request for url "${request.url}"`);
 
         const user = request.body || {};
-        const roles = [];
+        const roles = ["ttt","xxx"];
  
-        roles.push("tttt");
-        return { 
-            "roles": [
-              "Reader",
-              "Contributor"
-            ]
-          };
+        return {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: { roles }
+        };
+        
 
     }
 });
