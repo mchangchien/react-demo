@@ -19,8 +19,8 @@ app.http('GetRoles', {
         // Example usage:
         const name = getClaimValue("name");
 
-        roles.push(name);
-        return { "roles": ["xxx"] };
+        roles.push("tttt");
+        return { roles};
     }
 });
 
