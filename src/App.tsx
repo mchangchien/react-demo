@@ -81,7 +81,8 @@ function App() {
         {user ? (
           <>
             <p>
-              Welcome, {user.name}! permission is {user.permissions}
+              Welcome, {user.name} ({user.roles})! permission is{" "}
+              {user.permissions}
             </p>
             <p>Your roles: {user.roles.join(", ")}</p>
             <a href="/.auth/logout">Logout</a>
